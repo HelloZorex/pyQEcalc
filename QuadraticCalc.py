@@ -23,27 +23,7 @@ def reducefract(varNum, d01, fraction_list):
     fraction_list.append(int(varNum))
     fraction_list.append(int(d01))
 
-def selection():
-    while True:
-        print("Commands:")
-        print("Standard (1), Vertex (2), 0's (3), Exit (4):")
-        select = input("1, 2, 3, or 4?: ")
-        if select == "1":
-            num1, num2, num3 = list(map(int, input("a, b, c for ax^2+bx+c: ").split(", ")))
-            standard(num1, num2, num3)
-        elif select == "2":
-            num1, num2, num3 = list(map(int, input("a, h, k for a(x-h)^2+k: ").split(", ")))
-            vertex(num1, num2, num3)
-        elif select == "3":
-            num1, num2, num3 = list(map(int, input("a, b, c for a(x+b)(x+c): ").split(", ")))
-            zeros(num2, num2, num3)
-        elif select == "4" or select == "exit" or select == "Exit":
-            print("exiting...")
-            break
-        else:
-            print("not a valid input")
-
-def standard(num1, num2, num3):
+def standardsolution(num1, num2, num3):
     print(f"{num1}x^2+{num2}x+{num3}")
     x = float(-num2/(2*num1))
     y = float((num1*x**2)+(num2*x)+num3)
@@ -151,13 +131,37 @@ def standard(num1, num2, num3):
         error_list = [num1, num2, num3, "\n"]
         errorlog(error_list)
 
+def selection():
+    while True:
+        print("Commands:")
+        print("Standard (1), Vertex (2), 0's (3), Exit (4):")
+        select = input("1, 2, 3, or 4?: ")
+        if select == "1":
+            num1, num2, num3 = list(map(int, input("a, b, c for ax^2+bx+c: ").split(", ")))
+            standard(num1, num2, num3)
+        elif select == "2":
+            num1, num2, num3 = list(map(int, input("a, h, k for a(x-h)^2+k: ").split(", ")))
+            vertex(num1, num2, num3)
+        elif select == "3":
+            num1, num2, num3 = list(map(int, input("a, b, c for a(x+b)(x+c): ").split(", ")))
+            zeros(num2, num2, num3)
+        elif select == "4" or select == "exit" or select == "Exit":
+            print("exiting...")
+            break
+        else:
+            print("not a valid input")
+
+def standard(num1, num2, num3):
+    standardsolution(num1, num2, num3)
+
 def vertex(num1, num2, num3):
     print(f"{num1}(x-{num2})^2+{num3}\n vertex = x: {num2}, y: {num3}")
     print("not finished yet")
+    #manipulate this format into standard form
     
 def zeros(num1, num2, num3):
     print("not finished yet")
-
+    #manipulate this format into standard form
 
 selection()
 
