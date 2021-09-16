@@ -24,14 +24,13 @@ def reducefract(varNum, d01, fraction_list):
     fraction_list.append(int(d01))
 
 def standardsolution(num1, num2, num3):
-    print(f"{num1}x^2+{num2}x+{num3}")
     x = float(-num2/(2*num1))
     y = float((num1*x**2)+(num2*x)+num3)
     print(f" vertex = x: {x}, y: {y}")
     discriminant = num2**2-4*num1*num3
     if discriminant < 0:
         #imaginary number
-        print(f" 0's = (-{num2} +- sqrt ({discriminant})) / {2*num1}")
+        print(f" 0's = ({-num2} +- sqrt ({discriminant})) / {2*num1}")
     
     elif sqrt(discriminant).is_integer() == False:
         d01 = (2*num1)
@@ -143,8 +142,9 @@ def selection():
             num1, num2, num3 = list(map(int, input("a, h, k for a(x-h)^2+k: ").split(", ")))
             vertex(num1, num2, num3)
         elif select == "3":
-            num1, num2, num3 = list(map(int, input("a, b, c for a(x+b)(x+c): ").split(", ")))
-            zeros(num2, num2, num3)
+            #add inputs for numbers before x variables. Example: (x-5)(5x+2)
+            num1, mvar, num2, nvar, num3 = list(map(int, input("a, m, b, n, c for a(mx+b)(nx+c): ").split(", ")))
+            zeros(num1, mvar, num2, nvar, num3)
         elif select == "4" or select == "exit" or select == "Exit":
             print("exiting...")
             break
@@ -152,16 +152,24 @@ def selection():
             print("not a valid input")
 
 def standard(num1, num2, num3):
+    #print the correct signs with the corresponding variables
+    print(f"{num1}x^2+{num2}x+{num3}")
     standardsolution(num1, num2, num3)
 
 def vertex(num1, num2, num3):
     print(f"{num1}(x-{num2})^2+{num3}\n vertex = x: {num2}, y: {num3}")
-    print("not finished yet")
-    #manipulate this format into standard form
+    #print("not finished yet")
+    coef1 = (num2+num2)*num1
+    coef2 = ((num2*num2)*num1)+num3
+    #print(coef1)
+    #print(coef2)
+    standardsolution(num1, coef1, coef2)
     
-def zeros(num1, num2, num3):
-    print("not finished yet")
-    #manipulate this format into standard form
+def zeros(num1, mvar, num2, nvar, num3):
+    binom1 = num1*(nvar*mvar)
+    binom2 = num1*((nvar*num2)+(num3*mvar))
+    binom3 = num1*(num3*num2)
+    standardsolution(binom1, binom2, binom3)
 
 selection()
 
@@ -169,7 +177,7 @@ selection()
 #for t1 in range(1, 10):
 #    for t2 in range(1, 10):
 #        for t3 in range(1, 10):
-#            sifter(t1, t2, t3)
+#            vertex(t1, t2, t3)
 
 #error_list = [num1, num2, num3, factor_list, square_list, fraction_list]
 #errorlog(error_list)
