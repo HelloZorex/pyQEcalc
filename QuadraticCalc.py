@@ -45,18 +45,9 @@ def standardsolution(num1, num2, num3):
                     break
         if flag:
             #is not prime number
-            #factor out squares from the square root
             num = discriminant
-            factor_list = []
-            for n in range(2, num):
-                if num % n == 0:
-                    factor_list.append(n)
-
-            #check for any squares in the list
-            square_list = []
-            for n2 in factor_list:
-                if sqrt(n2).is_integer() == True:
-                    square_list.append(n2)
+            factor_list = [n for n in range(2, num) if num % n == 0]
+            square_list = [n2 for n2 in factor_list if sqrt(n2).is_integer() == True]
 
             if square_list:
                 square_list.sort()
@@ -66,10 +57,7 @@ def standardsolution(num1, num2, num3):
                     reducefract(varNum, d01, fraction_list)
                 
                 sq02 = int(discriminant/(square_list[-1]))
-                c01 = int(fraction_list[0])
-                d02 = int(fraction_list[1])
-                c02 = int(fraction_list[2])
-                d03 = int(fraction_list[3])
+                c01, d02, c02, d03 = list(map(int, fraction_list))
                 
                 #check if reduced numbers are integers
                 if d02 == d03:
@@ -116,7 +104,6 @@ def standardsolution(num1, num2, num3):
 
         else:
             #is prime number
-            print(discriminant, "is a prime number")
             print(f" (-{num2} +- sqrt ({discriminant})) / {2*num1}")
         
     elif sqrt(discriminant).is_integer() == True:
@@ -161,8 +148,6 @@ def vertex(num1, num2, num3):
     #print("not finished yet")
     coef1 = (num2+num2)*num1
     coef2 = ((num2*num2)*num1)+num3
-    #print(coef1)
-    #print(coef2)
     standardsolution(num1, coef1, coef2)
     
 def zeros(num1, mvar, num2, nvar, num3):
@@ -177,7 +162,7 @@ selection()
 #for t1 in range(1, 10):
 #    for t2 in range(1, 10):
 #        for t3 in range(1, 10):
-#            vertex(t1, t2, t3)
+#            standardsolution(t1, t2, t3)
 
 #error_list = [num1, num2, num3, factor_list, square_list, fraction_list]
 #errorlog(error_list)
