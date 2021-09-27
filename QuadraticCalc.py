@@ -27,36 +27,34 @@ def standardsolution(num1, num2, num3):
     x = float(-num2/(2*num1))
     y = float((num1*x**2)+(num2*x)+num3)
     print(f" vertex = x: {x}, y: {y}")
-    discriminant = num2**2-4*num1*num3
-    if discriminant < 0:
+    disc = num2**2-4*num1*num3
+    if disc < 0:
         #imaginary number
-        print(f" 0's = ({-num2} +- sqrt ({discriminant})) / {2*num1}")
+        print(f" 0's = ({-num2} +- sqrt ({disc})) / {2*num1}")
     
-    elif sqrt(discriminant).is_integer() == False:
+    elif sqrt(disc).is_integer() == False:
         d01 = (2*num1)
-        n01 = num2
         
         #find if square root is a prime number
         flag = False
-        if discriminant > 1:
-            for i in range(2, discriminant):
-                if (discriminant % i) == 0:
+        if disc > 1:
+            for nV01 in range(2, disc):
+                if (disc % nV01) == 0:
                     flag = True
                     break
         if flag:
             #is not prime number
-            num = discriminant
-            factor_list = [n for n in range(2, num) if num % n == 0]
-            square_list = [n2 for n2 in factor_list if sqrt(n2).is_integer() == True]
+            factor_list = [nV02 for nV02 in range(2, disc) if disc % nV02 == 0]
+            square_list = [nV03 for nV03 in factor_list if sqrt(nV03).is_integer() == True]
 
             if square_list:
                 square_list.sort()
                 sq01 = int(square_list[-1]**0.5)
                 fraction_list = []
-                for varNum in (-n01, sq01):
+                for varNum in (-num2, sq01):
                     reducefract(varNum, d01, fraction_list)
                 
-                sq02 = int(discriminant/(square_list[-1]))
+                sq02 = int(disc/(square_list[-1]))
                 c01, d02, c02, d03 = list(map(int, fraction_list))
                 
                 #check if reduced numbers are integers
@@ -87,29 +85,29 @@ def standardsolution(num1, num2, num3):
                             print(f" 0's = ({c01} / {d02} + {c02} sqrt({sq02})) / {d03} and ({c01} / {d02} - {c02} sqrt({sq02})) / {d03}")
             
             if not square_list:
-                y = 0
-                while y < num:
+                null_01 = 0
+                while null_01 < disc:
                     factor_tree = []
-                    for i in range(2, num):
-                        if num % i == 0:    
-                            num /= i
-                            factor_tree.append(i)
-                            y = 0
+                    for nV04 in range(2, disc):
+                        if disc % nV04 == 0:    
+                            disc /= nV04
+                            factor_tree.append(nV04)
+                            null_01 = 0
                         else:
-                            y += 1
+                            null_01 += 1
                 fraction_list = []
-                reducefract(-n01, d01, fraction_list)
+                reducefract(-num2, d01, fraction_list)
                 join_tree = ", ".join(map(str, factor_tree))
                 print(f" ({fraction_list[0]} +- sqrt ({join_tree})) / {fraction_list[1]}")
 
         else:
             #is prime number
-            print(f" (-{num2} +- sqrt ({discriminant})) / {2*num1}")
+            print(f" (-{num2} +- sqrt ({disc})) / {2*num1}")
         
-    elif sqrt(discriminant).is_integer() == True:
+    elif sqrt(disc).is_integer() == True:
         #perfect square
-        add = (-num2 + (discriminant)**0.5)/(2*num1)
-        subtract = (-num2 - (discriminant)**0.5)/(2*num1)
+        add = (-num2 + (disc)**0.5)/(2*num1)
+        subtract = (-num2 - (disc)**0.5)/(2*num1)
         print(f" 0's = {add, subtract}")
     
     else:
