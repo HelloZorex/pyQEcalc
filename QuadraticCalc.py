@@ -1,4 +1,10 @@
+import tkinter as tk
 from math import sqrt
+
+root = tk.Tk()
+
+#create dictonary to store all of the different displayed text
+
 
 def errorlog(errorlist):
     fileWrite = open("quadraticErrorLog", "a")
@@ -154,8 +160,34 @@ def zeros(num1, mvar, num2, nvar, num3):
     binom3 = num1*(num3*num2)
     standardsolution(binom1, binom2, binom3)
 
-selection()
+#selection()
 
+def qCalc():
+    aV = e1.get()
+    bV = e2.get()
+    cV = e3.get()
+    aV, bV, cV = int(aV), int(bV), int(cV)
+    standardsolution(aV, bV, cV)
+    #print(newVar)
+    ans = tk.Label(root, text=f"answer: {aV}")
+    ans.grid(row=5, column=1)
+
+tk.Label(root, text="ax^2 + bx + c").grid(row=0, column=1)
+e1 = tk.Entry(root)
+e2 = tk.Entry(root)
+e3 = tk.Entry(root)
+
+e1.grid(row=1, column=1)
+e2.grid(row=2, column=1)
+e3.grid(row=3, column=1)
+
+tk.Label(root, text="a: ").grid(row=1, column=0)
+tk.Label(root, text="b: ").grid(row=2, column=0)
+tk.Label(root, text="c: ").grid(row=3, column=0)
+
+tk.Button(root, text="Calculate", command=qCalc).grid(row=4, column=1)
+
+root.mainloop()
 
 #for t1 in range(1, 10):
 #    for t2 in range(1, 10):
