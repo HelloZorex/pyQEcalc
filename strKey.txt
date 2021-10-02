@@ -1,0 +1,10 @@
+{'key01': f(0's = ({-num2} +- sqrt ({disc})) / {2*num1})
+key02:
+key03:
+key04:
+key05:
+key06:
+key07:
+key08:
+key09:
+}
