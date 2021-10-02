@@ -1,8 +1,5 @@
 import tkinter as tk
 from math import sqrt
-#import ast
-
-#create dictonary to store all of the different displayed text
 
 def errorlog(errorlist):
     fileWrite = open("quadraticErrorLog", "a")
@@ -218,6 +215,7 @@ def opt1():
     tk.Label(root, text="b: ").grid(row=2, column=0)
     tk.Label(root, text="c: ").grid(row=3, column=0)
 
+    tk.Button(root, text="Quit", command=quit).grid(row=4, column=0)
     tk.Button(root, text="Calculate", command=exe1).grid(row=4, column=1)
 
 def opt2():
@@ -239,6 +237,7 @@ def opt2():
     tk.Label(root, text="h: ").grid(row=2, column=0)
     tk.Label(root, text="k: ").grid(row=3, column=0)
 
+    tk.Button(root, text="Quit", command=quit).grid(row=4, column=0)
     tk.Button(root, text="Calculate", command=exe2).grid(row=4, column=1)
 
 def opt3():
@@ -268,6 +267,7 @@ def opt3():
     tk.Label(root, text="n: ").grid(row=4, column=0)
     tk.Label(root, text="c: ").grid(row=5, column=0)
 
+    tk.Button(root, text="Quit", command=quit).grid(row=6, column=0)
     tk.Button(root, text="Calculate", command=exe3).grid(row=6, column=1)
 
 def selector():
