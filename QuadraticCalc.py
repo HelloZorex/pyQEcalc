@@ -1,5 +1,13 @@
-import tkinter as tk
+import ast
 from math import sqrt
+
+with open("strdict.txt") as f:
+    data = f.read()
+
+sd = ast.literal_eval(data)
+
+def strdict(key):
+    return "0's = " + eval("f"+sd[key])
 
 def errorlog(errorlist):
     fileWrite = open("quadraticErrorLog", "a")
@@ -25,17 +33,19 @@ def reducefract(varNum, d01, fraction_list):
     fraction_list.append(int(d01))
 
 def standardsolution(num1, num2, num3):
-    global xCoord
-    global yCoord
-    global strVar
+    global xCoord, yCoord
+    global num01, num02, num03
+    global c01, c02, d02, d03, f01, f02, sq02, j01
+    global add, subtract, strVar, disc
+    num01, num02, num03 = num1, num2, num3
     xCoord = float(round((-num2/(2*num1)), 2))
     yCoord = float(round(((num1*xCoord**2)+(num2*xCoord)+num3), 2))
     #print(f" vertex = x: {xCoord}, y: {yCoord}")
     disc = num2**2-4*num1*num3
     if disc < 0:
         #imaginary number
-        #print(dict1["key01"])
-        strVar = (f" 0's = ({-num2} +- sqrt ({disc})) / {2*num1}")
+        strVar = strdict("1")
+        return strVar
     
     elif sqrt(disc).is_integer() == False:
         d01 = (2*num1)
@@ -69,31 +79,31 @@ def standardsolution(num1, num2, num3):
                         #denominator is 1
                         if c02 == 1 or c02 == -1:
                             #if number next to square root is 1 or -1 and denominator is 1 or -1, don't print it
-                            strVar = (f" 0's = {c01} + sqrt({sq02}) and {c01} - sqrt({sq02})")
+                            strVar = strdict("2")
                             return strVar
                         else:
                             #if denominator is 1 or -1, don't print it
-                            strVar = (f" 0's = {c01} + {c02} sqrt({sq02}) and {c01} - {c02} sqrt({sq02})")
+                            strVar = strdict("3")
                             return strVar
                     else:
                         #if denominator is not 1 or -1, print it
-                        strVar = (f" 0's = ({c01} + {c02} sqrt({sq02})) / {d02} and ({c01} - {c02} sqrt({sq02})) / {d02}")
+                        strVar = strdict("4")
                         return strVar
                 else:
                     #different denominators
                     if c01 == d02 or c01 == -d02:
                         if c02 == 1 or c02 == -1:                    
-                            strVar = (f" 0's = ({c01} + sqrt({sq02})) / {d03} and ({c01} - sqrt({sq02})) / {d03}")
+                            strVar = strdict("5")
                             return strVar
                         else:
-                            strVar = (f" 0's = ({c01} + {c02} sqrt({sq02})) / {d03} and ({c01} - {c02} sqrt({sq02})) / {d03}")
+                            strVar = strdict("6")
                             return strVar
                     else:
-                        if c02 == 1 or c02 == -1:                    
-                            strVar = (f" 0's = ({c01} / {d02} + sqrt({sq02})) / {d03} and ({c01} / {d02} - sqrt({sq02})) / {d03}")
+                        if c02 == 1 or c02 == -1:
+                            strVar = strdict("7")
                             return strVar
                         else:
-                            strVar = (f" 0's = ({c01} / {d02} + {c02} sqrt({sq02})) / {d03} and ({c01} / {d02} - {c02} sqrt({sq02})) / {d03}")
+                            strVar = strdict("8")
                             return strVar
 
             if not square_list:
@@ -110,19 +120,20 @@ def standardsolution(num1, num2, num3):
                 fraction_list = []
                 reducefract(-num2, d01, fraction_list)
                 join_tree = ", ".join(map(str, factor_tree))
-                strVar = (f" ({fraction_list[0]} +- sqrt ({join_tree})) / {fraction_list[1]}")
+                f01 , f02, j01 = fraction_list[0], fraction_list[1], join_tree
+                strVar = strdict("9")
                 return strVar
 
         else:
             #is prime number
-            strVar = (f" (-{num2} +- sqrt ({disc})) / {2*num1}")
+            strVar = strdict("10")
             return strVar
 
     elif sqrt(disc).is_integer() == True:
         #perfect square
         add = (-num2 + (disc)**0.5)/(2*num1)
         subtract = (-num2 - (disc)**0.5)/(2*num1)
-        strVar = (f" 0's = {add, subtract}")
+        strVar = strdict("11")
         return strVar
 
     else:
@@ -154,22 +165,23 @@ def selection():
 def standard(num1, num2, num3):
     #print the correct signs with the corresponding variables
     print(f"{num1}x^2+{num2}x+{num3}")
-    standardsolution(num1, num2, num3)
+    print(standardsolution(num1, num2, num3))
 
 def vertex(num1, num2, num3):
     print(f"{num1}(x-{num2})^2+{num3}\n vertex = x: {num2}, y: {num3}")
     #print("not finished yet")
     coef1 = (num2+num2)*num1
     coef2 = ((num2*num2)*num1)+num3
-    standardsolution(num1, coef1, coef2)
+    print(standardsolution(num1, coef1, coef2))
     
 def zeros(num1, mvar, num2, nvar, num3):
     binom1 = num1*(nvar*mvar)
     binom2 = num1*((nvar*num2)+(num3*mvar))
     binom3 = num1*(num3*num2)
-    standardsolution(binom1, binom2, binom3)
+    print(standardsolution(binom1, binom2, binom3))
 
-#selection()
+
+# selection()
 
 #for t1 in range(1, 10):
 #    for t2 in range(1, 10):
