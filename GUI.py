@@ -51,9 +51,8 @@ def exe3():
 
 def opt1():
     tk.Label(root, text="ax^2 + bx + c").grid(row=0, column=1)
-    global e01
-    global e02
-    global e03
+    
+    global e01, e02, e03
     
     e01 = tk.Entry(root)
     e02 = tk.Entry(root)
@@ -73,9 +72,7 @@ def opt1():
 def opt2():
     tk.Label(root, text="a(x-h)^2 + k").grid(row=0, column=1)
     
-    global e11
-    global e12
-    global e13
+    global e11, e12, e13
     
     e11 = tk.Entry(root)
     e12 = tk.Entry(root)
@@ -95,11 +92,7 @@ def opt2():
 def opt3():
     tk.Label(root, text="a(mx+b)(nx+c)").grid(row=0, column=1)
     
-    global e21
-    global e22
-    global e23
-    global e24
-    global e25
+    global e21, e22, e23, e24, e25
 
     e21 = tk.Entry(root)
     e22 = tk.Entry(root)
